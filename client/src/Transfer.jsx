@@ -1,3 +1,4 @@
+import { toHex } from "ethereum-cryptography/utils";
 import { useState } from "react";
 import server from "./server";
 import { signMessage } from "./utils";
@@ -19,7 +20,7 @@ function Transfer({ address, setBalance, privateKey }) {
         data: { balance },
       } = await server.post(`send`, {
         message: msg,
-        signature,
+        signature: toHex(signature),
         recoveryBit,
       });
       setBalance(balance);
